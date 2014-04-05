@@ -22,6 +22,12 @@
 
     <description>An implementation of the WAMP protocol for Wisdom (http://wamp.ws)</description>
 
+    <scm>
+        <url>https://github.com/wisdom-framework/wisdom-wamp/</url>
+        <connection>scm:git:git@github.com:wisdom-framework/wisdom-wamp.git</connection>
+        <developerConnection>scm:git:git@github.com:wisdom-framework/wisdom-wamp.git</developerConnection>
+    </scm>
+
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
