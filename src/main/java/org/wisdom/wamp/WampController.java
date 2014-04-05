@@ -607,12 +607,16 @@ public class WampController extends DefaultController implements Wamp, EventHand
         List<String> eligible = null;
         List<String> exclusions = null;
         for (String name : event.getPropertyNames()) {
-            if (WAMP_ELIGIBLE_EVENT_PROPERTY.equals(name)) {
-                eligible = (List<String>) event.getProperty(name);
-            } else if (WAMP_EXCLUSIONS_EVENT_PROPERTY.equals(name)) {
-                exclusions = (List<String>) event.getProperty(name);
-            } else {
-                map.put(name, event.getProperty(name));
+            switch (name) {
+                case WAMP_ELIGIBLE_EVENT_PROPERTY:
+                    eligible = (List<String>) event.getProperty(name);
+                    break;
+                case WAMP_EXCLUSIONS_EVENT_PROPERTY:
+                    exclusions = (List<String>) event.getProperty(name);
+                    break;
+                default:
+                    map.put(name, event.getProperty(name));
+                    break;
             }
         }
         JsonNode payload = json.toJson(map);
