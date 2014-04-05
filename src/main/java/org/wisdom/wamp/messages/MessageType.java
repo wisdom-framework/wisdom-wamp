@@ -49,11 +49,12 @@ public enum MessageType {
 
     /**
      * Gets the MessageType from the given code.
+     *
      * @param type the code
      * @return the MessageType
      * @throws EnumConstantNotPresentException if the code is not defined.
      */
-    public static MessageType getType(int type) throws EnumConstantNotPresentException{
+    public static MessageType getType(int type) {
         for (MessageType messageType : MessageType.values()) {
             if (messageType.code() == type) {
                 return messageType;

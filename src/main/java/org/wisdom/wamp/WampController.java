@@ -73,7 +73,7 @@ public class WampController extends DefaultController implements Wamp, EventHand
      */
     @ServiceProperty(name = EventConstants.EVENT_TOPIC)
     String[] topics = new String[]{
-            "wamp/*"
+            "wamp/*",
     };
 
     /**
@@ -155,7 +155,7 @@ public class WampController extends DefaultController implements Wamp, EventHand
     }
 
     @Invalidate
-    public void stop() {
+    public synchronized void stop() {
         clients = Collections.unmodifiableMap(new HashMap<String, WampClient>());
         registry = Collections.unmodifiableMap(new HashMap<String, ExportedService>());
     }
@@ -325,9 +325,9 @@ public class WampController extends DefaultController implements Wamp, EventHand
             LOGGER.error("Invalid PREFIX message, cannot identify the client {}", id);
             return;
         }
-        String prefix = message.get(1).asText();
+        String pref = message.get(1).asText();
         String uri = message.get(2).asText();
-        entry.getValue().registerPrefix(prefix, uri);
+        entry.getValue().registerPrefix(pref, uri);
     }
 
     private void handleSubscription(String id, Map.Entry<String, WampClient> entry, ArrayNode message) {
@@ -504,7 +504,7 @@ public class WampController extends DefaultController implements Wamp, EventHand
                 throw new RegistryException("Cannot register service on url " + url + " - url already taken");
             }
             svc = new ExportedService(service, properties, url);
-            HashMap<String, ExportedService> newRegistry = new HashMap<>(registry);
+            Map<String, ExportedService> newRegistry = new HashMap<>(registry);
             newRegistry.put(url, svc);
             registry = Collections.unmodifiableMap(newRegistry);
         }
@@ -523,7 +523,7 @@ public class WampController extends DefaultController implements Wamp, EventHand
 
         synchronized (this) {
             if (registry.containsKey(url)) {
-                HashMap<String, ExportedService> newRegistry = new HashMap<>(registry);
+                Map<String, ExportedService> newRegistry = new HashMap<>(registry);
                 newRegistry.remove(url);
                 registry = Collections.unmodifiableMap(newRegistry);
             }

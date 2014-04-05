@@ -19,25 +19,18 @@
  */
 package org.wisdom.wamp;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Represents a client accessing the server using WAMP.
- *
+ * <p/>
  * This class manages the topics listened by the clients and its URL-CURL relations (prefix).
  */
 public class WampClient {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(WampClient.class);
-
     private final String id;
-    private final HashSet<String> topics;
-    private final HashMap<String, String> prefixes;
+    private final Set<String> topics;
+    private final Map<String, String> prefixes;
     private final String wisdomClientId;
 
     public WampClient(String wisdomClientId) {
@@ -74,7 +67,7 @@ public class WampClient {
     public String getUri(String uri) {
         int index = uri.indexOf(":");
         // Detect if the given uri is prefixed.
-        if (index != -1  && ! uri.startsWith("http")) {
+        if (index != -1 && !uri.startsWith("http")) {
             String prefix = uri.substring(0, index);
             String tail = uri.substring(index + 1);
             String url = prefixes.get(prefix);
