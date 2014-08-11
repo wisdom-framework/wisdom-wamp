@@ -1,0 +1,22 @@
+{
+    "name": "wisdom-wamp",
+    "version":"0.4",
+    "description": "Expose services using the WAMP v1 protocol. RPC invocation (client to server), Event notification (client to server and server to client). Based on a Web Socket sub-protocol. ",
+ "repository": {
+        "type": "git",
+        "url": "https://github.com/wisdom-framework/wisdom-wamp"
+    },
+
+    "author": "The Wisdom Team",
+    "license": {
+            "type": "Apache",
+            "url": "https://github.com/wisdom-framework/wisdom-wamp/blob/master/LICENSE.txt"
+        },
+    "homepage": "https://github.com/wisdom-framework/wisdom-wamp",
+    "keywords": [
+        "websocket",
+        "rpc",
+        "protocol"        
+    ]
+}
+
